@@ -592,6 +592,145 @@
                 font-size: var(--text-2xl);
             }
         }
+
+        /* Photo Gallery */
+        .photo-gallery {
+            position: relative;
+        }
+
+        .gallery-viewer {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .gallery-image-container {
+            flex: 1;
+            position: relative;
+            background: var(--charcoal-900);
+            border-radius: 6px;
+            overflow: hidden;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-image-container img {
+            max-width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .gallery-nav-btn {
+            flex-shrink: 0;
+            width: 48px;
+            height: 56px;
+            background: var(--orange-500);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            transition: all 0.2s ease;
+        }
+
+        .gallery-nav-btn:hover {
+            background: var(--orange-400);
+            transform: scale(1.05);
+        }
+
+        .gallery-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .gallery-nav-btn svg {
+            width: 20px;
+            height: 20px;
+            color: var(--charcoal-900);
+        }
+
+        .gallery-nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .gallery-nav-btn:disabled:hover {
+            transform: none;
+        }
+
+        .gallery-info {
+            margin-top: var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--space-4);
+        }
+
+        .gallery-text {
+            flex: 1;
+        }
+
+        .gallery-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: var(--space-2);
+        }
+
+        .gallery-commentary {
+            color: var(--gray-300);
+            line-height: 1.6;
+        }
+
+        .gallery-counter {
+            flex-shrink: 0;
+            font-family: var(--font-mono);
+            font-size: var(--text-sm);
+            color: var(--gray-400);
+            background: var(--charcoal-900);
+            padding: var(--space-2) var(--space-4);
+            border-radius: 4px;
+        }
+
+        @media (max-width: 600px) {
+            .gallery-viewer {
+                flex-direction: column;
+            }
+
+            .gallery-nav-btn {
+                display: none;
+            }
+
+            .gallery-mobile-nav {
+                display: flex;
+                justify-content: center;
+                gap: var(--space-4);
+                margin-top: var(--space-4);
+            }
+
+            .gallery-mobile-nav .gallery-nav-btn {
+                display: flex;
+            }
+
+            .gallery-info {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .gallery-counter {
+                align-self: flex-end;
+            }
+        }
+
+        @media (min-width: 601px) {
+            .gallery-mobile-nav {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -600,6 +739,7 @@
             <li><a href="#eliot" class="active">Eliot</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#blathering">Blathering</a></li>
+            <li><a href="#photos">Photos</a></li>
         </ul>
     </nav>
 
@@ -703,6 +843,51 @@
             </div>
         </section>
 
+        <!-- Photos Section -->
+        <section id="photos">
+            <h2><span class="accent">Photos</span></h2>
+
+            <div class="panel photo-gallery">
+                <div class="panel-accent orange"></div>
+                <div class="panel-body">
+                    <div class="gallery-viewer">
+                        <button class="gallery-nav-btn" id="galleryPrev" aria-label="Previous photo">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 18l-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <div class="gallery-image-container">
+                            <img id="galleryImage" src="" alt="">
+                        </div>
+                        <button class="gallery-nav-btn" id="galleryNext" aria-label="Next photo">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="gallery-mobile-nav">
+                        <button class="gallery-nav-btn" id="galleryPrevMobile" aria-label="Previous photo">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 18l-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <button class="gallery-nav-btn" id="galleryNextMobile" aria-label="Next photo">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="gallery-info">
+                        <div class="gallery-text">
+                            <h3 class="gallery-title" id="galleryTitle"></h3>
+                            <p class="gallery-commentary" id="galleryCommentary"></p>
+                        </div>
+                        <span class="gallery-counter" id="galleryCounter"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <footer>
             <p>&copy; 2026 Eliot Eshelman. Built by Claude Code</p>
             <p style="margin-top: var(--space-6); font-size: var(--text-xs); color: var(--gray-500); max-width: 600px; margin-left: auto; margin-right: auto;">
@@ -750,6 +935,128 @@
             }
             window.addEventListener('scroll', updateScrollIndicator);
             updateScrollIndicator();
+
+            // Photo Gallery
+            const photos = [
+                {
+                    src: 'assets/photos/Eliot-with-ENIAC-and-NanoBanana.JPG',
+                    title: 'Eliot with ENIAC',
+                    commentary: 'I visited ENIAC at Univ of Pennsylvania. Amazing exhibit, but the glare was terrible so I asked Nano Banana to "Tron-ify" me.'
+                },
+                {
+                    src: 'assets/photos/Eliot-at-GTC17.jpg',
+                    title: 'Eliot at GTC17',
+                    commentary: 'NVIDIA\'s GTC17 included a demo of what would eventually become StyleGAN. A certain black-jacket-wearing gentleman also came by, so I took photos of that too.'
+                },
+                {
+                    src: 'assets/photos/The whole gang.jpg',
+                    title: 'The Whole Gang',
+                    commentary: 'My family prepping for the Platteville parade back in the 80\'s.'
+                },
+                {
+                    src: 'assets/photos/EE3atSC19.jpg',
+                    title: 'SC19 Air and Space Museum',
+                    commentary: 'Enjoying the Wings Over the Rockies Air and Space Museum in Denver, Colorado.'
+                },
+                {
+                    src: 'assets/photos/Ohm-Beowulf-Cluster.jpg',
+                    title: 'Baby\'s first Beowulf',
+                    commentary: 'This is Ohm, my first beowulf cluster. I participated in NSF-funded research on cluster topologies with Professor Joel Adams.'
+                },
+                {
+                    src: 'assets/photos/Eliot-with-Mark-I.jpeg',
+                    title: 'Eliot with Mark I',
+                    commentary: 'Visit Harvard\'s new engineering building to witness where Grace Hopper got her start with the "Mark I". Feel free to ask me for a nanosecond the next time you see me and I\'ll hook you up ;-)'
+                },
+                {
+                    src: 'assets/photos/Mark-I-wide.jpeg',
+                    title: 'Mark I computer',
+                    commentary: 'The Mark I computer consumed 3.7 kW and provided 0.167 FLOPS of performance. An NVIDIA B200 at 1 kW provides 37000000000000 FLOPS (FP64 HPL).'
+                },
+                {
+                    src: 'assets/photos/Eliot-with-NVL72.jpeg',
+                    title: 'Eliot with NVIDIA GB200 NVL72',
+                    commentary: 'I brought Grace Hopper by to see the shiny new computers.'
+                },
+                {
+                    src: 'assets/photos/Eliot-with-PDP12.jpeg',
+                    title: 'Eliot with PDP-12',
+                    commentary: 'Visit MIT to witness another piece of computing history - the DEC PDP-12. The PDP-12 consumed 1.7 kW and provided 40,000 FLOPS of performance. An NVIDIA B200 at 1 kW provides 37000000000000 FLOPS (FP64 HPL).'
+                }
+            ];
+
+            let currentPhotoIndex = 0;
+
+            const galleryImage = document.getElementById('galleryImage');
+            const galleryTitle = document.getElementById('galleryTitle');
+            const galleryCommentary = document.getElementById('galleryCommentary');
+            const galleryCounter = document.getElementById('galleryCounter');
+            const prevBtn = document.getElementById('galleryPrev');
+            const nextBtn = document.getElementById('galleryNext');
+            const prevBtnMobile = document.getElementById('galleryPrevMobile');
+            const nextBtnMobile = document.getElementById('galleryNextMobile');
+
+            function showPhoto(index) {
+                if (index < 0 || index >= photos.length) return;
+
+                currentPhotoIndex = index;
+                const photo = photos[index];
+
+                galleryImage.src = photo.src;
+                galleryImage.alt = photo.title;
+                galleryTitle.textContent = photo.title;
+                galleryCommentary.textContent = photo.commentary;
+                galleryCounter.textContent = (index + 1) + ' / ' + photos.length;
+
+                // Preload adjacent images
+                if (index > 0) {
+                    const prevImg = new Image();
+                    prevImg.src = photos[index - 1].src;
+                }
+                if (index < photos.length - 1) {
+                    const nextImg = new Image();
+                    nextImg.src = photos[index + 1].src;
+                }
+            }
+
+            function prevPhoto() {
+                if (currentPhotoIndex > 0) {
+                    showPhoto(currentPhotoIndex - 1);
+                } else {
+                    showPhoto(photos.length - 1); // Wrap to end
+                }
+            }
+
+            function nextPhoto() {
+                if (currentPhotoIndex < photos.length - 1) {
+                    showPhoto(currentPhotoIndex + 1);
+                } else {
+                    showPhoto(0); // Wrap to beginning
+                }
+            }
+
+            prevBtn.addEventListener('click', prevPhoto);
+            nextBtn.addEventListener('click', nextPhoto);
+            prevBtnMobile.addEventListener('click', prevPhoto);
+            nextBtnMobile.addEventListener('click', nextPhoto);
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                const photosSection = document.getElementById('photos');
+                const rect = photosSection.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+                if (isVisible) {
+                    if (e.key === 'ArrowLeft') {
+                        prevPhoto();
+                    } else if (e.key === 'ArrowRight') {
+                        nextPhoto();
+                    }
+                }
+            });
+
+            // Initialize gallery
+            showPhoto(0);
         });
     </script>
 </body>
