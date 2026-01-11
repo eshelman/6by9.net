@@ -7,8 +7,34 @@ This file provides guidance for AI assistants working on the 6by9.net repository
 **Repository:** 6by9.net
 **Owner:** Eliot Eshelman
 **License:** MIT License (2026)
+**URL:** https://6by9.net
 
-This is a new project repository. The codebase is in its initial stages with minimal structure.
+Personal website for Eliot Eshelman built with Node.js.
+
+## Technology Stack
+
+- **Runtime:** Node.js
+- **Deployment:** Digital Ocean App Platform (auto-deploys on push to GitHub)
+- **Database:** None - static content only
+- **External Integrations:** Interactive panels pulling data from external APIs (e.g., X/Twitter posts)
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    6by9.net                             │
+├─────────────────────────────────────────────────────────┤
+│  Static Content          │  Interactive Panels          │
+│  - HTML/CSS/JS           │  - X/Twitter feeds           │
+│  - Assets                │  - Other external APIs       │
+└─────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+              ┌─────────────────────────┐
+              │ Digital Ocean App Platform │
+              │   (Auto-deploy on push)    │
+              └─────────────────────────┘
+```
 
 ## Current Repository Structure
 
@@ -18,6 +44,8 @@ This is a new project repository. The codebase is in its initial stages with min
 ├── CLAUDE.md        # This file - AI assistant guidance
 └── .git/            # Git version control
 ```
+
+*Structure will expand as the project develops*
 
 ## Development Guidelines
 
@@ -49,24 +77,37 @@ As the project grows, maintain these principles:
 # Clone the repository
 git clone <repository-url>
 cd 6by9.net
+
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
 ```
 
 ### Adding New Features
 
 1. Create a feature branch
 2. Implement changes
-3. Test thoroughly
+3. Test locally with `npm run dev`
 4. Commit with descriptive messages
-5. Push and create a pull request
+5. Push to GitHub (triggers auto-deploy to Digital Ocean)
 
-## Project Context
+### Deployment
 
-This repository appears to be associated with the domain "6by9.net". As the project develops, this section should be updated with:
+Deployment is automatic via Digital Ocean App Platform:
+- Push to main branch triggers production deployment
+- No manual deployment steps required
+- Monitor deployment status in Digital Ocean dashboard
 
-- Project purpose and goals
-- Technology stack decisions
-- Architecture decisions
-- External dependencies
+## External API Integrations
+
+When adding interactive panels that pull external data:
+
+1. **X/Twitter:** Use embedded widgets or API calls for displaying posts
+2. **Other APIs:** Document any new integrations in this section
+3. **Rate Limits:** Be mindful of API rate limits; cache responses when appropriate
+4. **Client-side:** Prefer client-side API calls to avoid server dependencies
 
 ## Notes for AI Assistants
 
