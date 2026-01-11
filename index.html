@@ -361,7 +361,7 @@
             overflow: hidden;
         }
 
-        .embed-container.twitter-embed .twitter-timeline {
+        .embed-container.twitter-embed .x-timeline {
             width: 100% !important;
         }
 
@@ -769,13 +769,12 @@
                     </div>
 
                     <div class="embed-container twitter-embed">
-                        <a class="twitter-timeline"
+                        <a class="x-timeline"
+                           data-width="500"
+                           data-height="550"
                            data-theme="dark"
-                           data-chrome="noheader nofooter noborders noscrollbar"
-                           data-height="500"
-                           data-width="100%"
-                           href="https://twitter.com/hpc_twit?ref_src=twsrc%5Etfw">
-                            Loading tweets...
+                           href="https://x.com/hpc_twit?ref_src=twsrc%5Etfw">
+                            Tweets by hpc_twit
                         </a>
                     </div>
                 </div>
@@ -787,29 +786,8 @@
         </footer>
     </main>
 
-    <!-- Twitter Widget JS -->
-    <script>
-        window.twttr = (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0],
-                t = window.twttr || {};
-            if (d.getElementById(id)) return t;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://platform.twitter.com/widgets.js";
-            fjs.parentNode.insertBefore(js, fjs);
-
-            t._e = [];
-            t.ready = function(f) {
-                t._e.push(f);
-            };
-
-            return t;
-        }(document, "script", "twitter-wjs"));
-
-        twttr.ready(function(twttr) {
-            twttr.widgets.load(document.getElementById("blathering"));
-        });
-    </script>
+    <!-- X Widget JS -->
+    <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
     <!-- Navigation Active State -->
     <script>
