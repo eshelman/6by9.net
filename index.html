@@ -298,25 +298,55 @@
             height: 16px;
         }
 
-        /* Colored Links */
-        .link-orange {
+        /* Principle Cards */
+        .principles-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .principle {
+            display: block;
+            background: var(--charcoal-900);
+            border-left: 3px solid var(--orange-500);
+            padding: var(--space-4) var(--space-6);
+            border-radius: 0 6px 6px 0;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .principle:hover {
+            background: var(--charcoal-700);
+        }
+
+        .principle.orange {
+            border-left-color: var(--orange-500);
+        }
+
+        .principle.blue {
+            border-left-color: var(--blue-500);
+        }
+
+        .principle h4 {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+            color: var(--white);
+        }
+
+        .principle.orange h4 {
             color: var(--orange-400);
-            text-decoration: none;
-            transition: color 0.2s ease;
         }
 
-        .link-orange:hover {
-            color: var(--orange-300);
-        }
-
-        .link-blue {
+        .principle.blue h4 {
             color: var(--blue-400);
-            text-decoration: none;
-            transition: color 0.2s ease;
         }
 
-        .link-blue:hover {
-            color: var(--blue-300);
+        .principle p {
+            font-size: var(--text-sm);
+            color: var(--gray-400);
+            line-height: 1.5;
+            margin-bottom: 0;
         }
 
         /* Buttons */
@@ -661,11 +691,16 @@
                 <div class="panel-accent blue"></div>
                 <div class="panel-body">
                     <h3>Social Media</h3>
-                    <p>
-                        <a href="https://x.com/hpc_twit" class="link-orange" target="_blank" rel="noopener">X @hpc_twit</a>
-                        &nbsp;&bull;&nbsp;
-                        <a href="https://www.linkedin.com/in/elioteshelman" class="link-blue" target="_blank" rel="noopener">LinkedIn @elioteshelman</a>
-                    </p>
+                    <div class="principles-list">
+                        <a href="https://x.com/hpc_twit" class="principle orange" target="_blank" rel="noopener">
+                            <h4>X</h4>
+                            <p>@hpc_twit</p>
+                        </a>
+                        <a href="https://www.linkedin.com/in/elioteshelman" class="principle blue" target="_blank" rel="noopener">
+                            <h4>LinkedIn</h4>
+                            <p>@elioteshelman</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
