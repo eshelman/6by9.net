@@ -40,12 +40,46 @@ Personal website for Eliot Eshelman built with Node.js.
 
 ```
 6by9.net/
-├── LICENSE          # MIT License
-├── CLAUDE.md        # This file - AI assistant guidance
-└── .git/            # Git version control
+├── LICENSE              # MIT License
+├── CLAUDE.md            # This file - AI assistant guidance
+├── design-language.html # Design system reference
+└── .git/                # Git version control
 ```
 
 *Structure will expand as the project develops*
+
+## Design Language
+
+The project uses a custom design system documented in `design-language.html`. Key principles:
+
+### Visual Identity
+
+- **Color Palette:** Charcoal backgrounds (#1a1a1f, #24242b) with orange (#ff6b2c) and blue (#2d8fc9) accents
+- **Typography:** Inter for UI text, JetBrains Mono for code
+- **Spacing:** 8px base unit with consistent scale (4, 8, 12, 16, 24, 32, 48, 64, 96px)
+
+### Design Tokens (CSS Variables)
+
+```css
+/* Primary Colors */
+--orange-500: #ff6b2c;
+--blue-500: #2d8fc9;
+--charcoal-900: #1a1a1f;  /* page background */
+--charcoal-800: #24242b;  /* card background */
+
+/* Typography */
+--font-sans: 'Inter', system-ui, sans-serif;
+--font-mono: 'JetBrains Mono', monospace;
+```
+
+### Core Principles
+
+1. **High Data-Ink Ratio:** Maximize meaningful content, minimize decoration
+2. **Generous Whitespace:** 8px base unit creates breathing room
+3. **Geometric Accents:** Hexagons and triangles used sparingly as visual motifs
+4. **Tufte-Inspired:** Follow data visualization best practices—no chartjunk, honest scales
+
+When implementing new features, reference `design-language.html` for component patterns, color usage, and typography guidelines.
 
 ## Development Guidelines
 
