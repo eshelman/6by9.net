@@ -415,10 +415,6 @@
             position: fixed;
             bottom: var(--space-8);
             right: var(--space-8);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--space-2);
             z-index: 50;
             opacity: 1;
             transition: opacity 0.3s ease;
@@ -430,108 +426,18 @@
         }
 
         .scroll-indicator a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--space-2);
-            text-decoration: none;
+            display: block;
             color: var(--gray-400);
-            font-size: var(--text-xs);
-            font-family: var(--font-mono);
+            animation: fade-pulse 3s ease-in-out infinite;
         }
 
         .scroll-indicator a:hover {
             color: var(--blue-400);
         }
 
-        .scroll-hexagons {
-            position: relative;
-            width: 48px;
-            height: 56px;
-        }
-
-        .scroll-hexagon {
-            position: absolute;
-            width: 48px;
-            height: 56px;
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            border: 2px solid var(--blue-500);
-            background: transparent;
-            animation: pulse-hex 2s ease-in-out infinite;
-        }
-
-        .scroll-hexagon::before {
-            content: '';
-            position: absolute;
-            inset: 2px;
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            background: var(--charcoal-900);
-        }
-
-        .scroll-hexagon::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            border: 2px solid var(--blue-500);
-            background: transparent;
-        }
-
-        .scroll-hexagon:nth-child(2) {
-            animation-delay: 0.3s;
-            opacity: 0.6;
-            transform: scale(0.75);
-            top: 7px;
-            left: 6px;
-        }
-
-        .scroll-hexagon:nth-child(3) {
-            animation-delay: 0.6s;
-            opacity: 0.3;
-            transform: scale(0.5);
-            top: 14px;
-            left: 12px;
-        }
-
-        @keyframes pulse-hex {
-            0%, 100% {
-                opacity: 0.4;
-                transform: scale(1) translateY(0);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1) translateY(4px);
-            }
-        }
-
-        .scroll-hexagon:nth-child(2) {
-            animation-name: pulse-hex-inner;
-        }
-
-        .scroll-hexagon:nth-child(3) {
-            animation-name: pulse-hex-inner;
-        }
-
-        @keyframes pulse-hex-inner {
-            0%, 100% {
-                opacity: 0.3;
-            }
-            50% {
-                opacity: 0.7;
-            }
-        }
-
-        .scroll-arrow {
-            animation: bounce-arrow 2s ease-in-out infinite;
-        }
-
-        @keyframes bounce-arrow {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(6px);
-            }
+        @keyframes fade-pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
 
         @media (max-width: 900px) {
@@ -749,16 +655,10 @@
 
     <!-- Scroll Indicator -->
     <div class="scroll-indicator" id="scrollIndicator">
-        <a href="#projects">
-            <div class="scroll-hexagons">
-                <div class="scroll-hexagon"></div>
-                <div class="scroll-hexagon"></div>
-                <div class="scroll-hexagon"></div>
-            </div>
-            <svg class="scroll-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <a href="#projects" aria-label="Scroll to projects">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 5v14M19 12l-7 7-7-7"/>
             </svg>
-            <span>scroll</span>
         </a>
     </div>
 
