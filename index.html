@@ -186,6 +186,7 @@
         .panel-accent {
             height: 4px;
             background: var(--orange-500);
+            transition: background 0.2s ease;
         }
 
         .panel-accent.orange {
@@ -194,6 +195,20 @@
 
         .panel-accent.blue {
             background: var(--blue-500);
+        }
+
+        /* Panel accent hover: match hovered link color */
+        .panel:has(.link-orange:hover) .panel-accent {
+            background: var(--orange-500);
+        }
+
+        .panel:has(.link-blue:hover) .panel-accent {
+            background: var(--blue-500);
+        }
+
+        /* Project card accent matches border on hover */
+        .project-card:hover .panel-accent {
+            background: var(--orange-500);
         }
 
         .panel-body {
