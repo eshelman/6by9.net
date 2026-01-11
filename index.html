@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliot Eshelman — 6by9.net</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Core Palette */
+            --charcoal-900: #1a1a1f;
+            --charcoal-800: #24242b;
+            --charcoal-700: #2e2e37;
+            --charcoal-600: #3a3a45;
+            --charcoal-500: #52525e;
+
+            /* Primary: Orange */
+            --orange-500: #ff6b2c;
+            --orange-400: #ff8a54;
+            --orange-300: #ffab80;
+            --orange-600: #e55a1f;
+
+            /* Secondary: Blue */
+            --blue-500: #2d8fc9;
+            --blue-400: #4da8df;
+            --blue-300: #7cc2eb;
+            --blue-600: #1f7ab3;
+
+            /* Neutrals */
+            --white: #ffffff;
+            --gray-100: #f4f4f6;
+            --gray-200: #e4e4e8;
+            --gray-300: #c8c8d0;
+            --gray-400: #9898a4;
+            --gray-500: #6b6b78;
+
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+            /* Spacing Scale (8px base) */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+
+            /* Type Scale */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 2rem;
+            --text-4xl: 2.5rem;
+
+            /* Layout */
+            --nav-width: 200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--charcoal-900);
+            color: var(--gray-100);
+            line-height: 1.6;
+            font-size: var(--text-base);
+        }
+
+        /* Subtle texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            z-index: 1000;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: var(--nav-width);
+            height: 100vh;
+            background: var(--charcoal-800);
+            border-right: 1px solid var(--charcoal-700);
+            padding: var(--space-8) var(--space-6);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-family: var(--font-mono);
+            font-size: var(--text-sm);
+            color: var(--gray-400);
+            margin-bottom: var(--space-12);
+            letter-spacing: 0.05em;
+        }
+
+        .nav-logo span {
+            color: var(--orange-500);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .nav-links a {
+            display: block;
+            padding: var(--space-3) var(--space-4);
+            color: var(--gray-300);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: var(--text-sm);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+            background: var(--charcoal-700);
+        }
+
+        .nav-links a.active {
+            color: var(--orange-400);
+            background: var(--charcoal-700);
+            border-left-color: var(--orange-500);
+        }
+
+        /* Main Content */
+        main {
+            margin-left: var(--nav-width);
+            min-height: 100vh;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: var(--space-16) var(--space-12);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-8);
+        }
+
+        section h2 .accent {
+            color: var(--orange-500);
+        }
+
+        section h2 .accent-blue {
+            color: var(--blue-500);
+        }
+
+        /* Panel Card */
+        .panel {
+            background: var(--charcoal-800);
+            border: 1px solid var(--charcoal-700);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .panel:hover {
+            border-color: var(--charcoal-600);
+        }
+
+        .panel-accent {
+            height: 4px;
+            background: linear-gradient(90deg, var(--orange-500), var(--blue-500));
+        }
+
+        .panel-accent.orange {
+            background: var(--orange-500);
+        }
+
+        .panel-accent.blue {
+            background: var(--blue-500);
+        }
+
+        .panel-body {
+            padding: var(--space-8);
+        }
+
+        .panel h3 {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            margin-bottom: var(--space-4);
+            color: var(--white);
+        }
+
+        .panel p {
+            color: var(--gray-300);
+            margin-bottom: var(--space-4);
+            line-height: 1.7;
+        }
+
+        .panel p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Bio Section */
+        .bio-content {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: var(--space-8);
+            align-items: start;
+        }
+
+        .bio-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--orange-500), var(--blue-500));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-4xl);
+            font-weight: 700;
+            color: var(--charcoal-900);
+        }
+
+        .bio-text h3 {
+            margin-bottom: var(--space-2);
+        }
+
+        .bio-title {
+            font-family: var(--font-mono);
+            font-size: var(--text-sm);
+            color: var(--orange-400);
+            margin-bottom: var(--space-4);
+        }
+
+        /* Project Card */
+        .project-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-card .panel {
+            cursor: pointer;
+        }
+
+        .project-card .panel:hover {
+            transform: translateY(-2px);
+            border-color: var(--orange-500);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--blue-400);
+            font-family: var(--font-mono);
+            font-size: var(--text-sm);
+            margin-top: var(--space-4);
+            transition: color 0.2s ease;
+        }
+
+        .project-card:hover .project-link {
+            color: var(--blue-300);
+        }
+
+        .project-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Social Embed Panels */
+        .social-panel {
+            margin-bottom: var(--space-6);
+        }
+
+        .social-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-4);
+        }
+
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-icon.linkedin {
+            background: #0077b5;
+        }
+
+        .social-icon.x {
+            background: var(--white);
+        }
+
+        .social-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .social-link {
+            color: var(--blue-400);
+            text-decoration: none;
+            font-size: var(--text-sm);
+            transition: color 0.2s ease;
+        }
+
+        .social-link:hover {
+            color: var(--blue-300);
+        }
+
+        /* Embed Container */
+        .embed-container {
+            background: var(--charcoal-900);
+            border: 1px solid var(--charcoal-600);
+            border-radius: 6px;
+            padding: var(--space-4);
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .embed-container.twitter-embed {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .embed-placeholder {
+            text-align: center;
+            color: var(--gray-500);
+        }
+
+        .embed-placeholder p {
+            margin-bottom: var(--space-4);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-6);
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: var(--text-sm);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--orange-500);
+            color: var(--charcoal-900);
+        }
+
+        .btn-primary:hover {
+            background: var(--orange-400);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--blue-400);
+            border: 1px solid var(--blue-500);
+        }
+
+        .btn-secondary:hover {
+            background: var(--blue-500);
+            color: var(--white);
+        }
+
+        /* Geo Divider */
+        .geo-divider {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            margin: var(--space-12) 0;
+        }
+
+        .geo-divider::before,
+        .geo-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--charcoal-700);
+        }
+
+        .geo-divider .diamond {
+            width: 8px;
+            height: 8px;
+            background: var(--orange-500);
+            transform: rotate(45deg);
+        }
+
+        /* Footer */
+        footer {
+            padding: var(--space-8) var(--space-12);
+            border-top: 1px solid var(--charcoal-700);
+            text-align: center;
+            color: var(--gray-500);
+            font-size: var(--text-sm);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            nav {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--charcoal-700);
+            }
+
+            .nav-logo {
+                margin-bottom: var(--space-4);
+            }
+
+            .nav-links {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: var(--space-2);
+            }
+
+            main {
+                margin-left: 0;
+            }
+
+            section {
+                padding: var(--space-8) var(--space-6);
+                min-height: auto;
+            }
+
+            .bio-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .bio-avatar {
+                margin: 0 auto var(--space-4);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .bio-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: var(--text-2xl);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-logo">6<span>by</span>9<span>.net</span></div>
+        <ul class="nav-links">
+            <li><a href="#eliot" class="active">Eliot</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#work">Work Stuff</a></li>
+            <li><a href="#blathering">Blathering</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Eliot Section -->
+        <section id="eliot">
+            <h2>Hello, I'm <span class="accent">Eliot</span></h2>
+
+            <div class="panel">
+                <div class="panel-accent"></div>
+                <div class="panel-body">
+                    <div class="bio-content">
+                        <div class="bio-avatar">EE</div>
+                        <div class="bio-text">
+                            <h3>Eliot Eshelman</h3>
+                            <div class="bio-title">HPC Infrastructure & AI Systems</div>
+                            <p>
+                                I work at the intersection of high-performance computing and AI infrastructure.
+                                Currently focused on building scalable systems that power the next generation
+                                of machine learning workloads.
+                            </p>
+                            <p>
+                                With a background spanning scientific computing, distributed systems, and
+                                cloud architecture, I'm passionate about making complex computational
+                                problems tractable and efficient.
+                            </p>
+                            <p style="margin-top: var(--space-6);">
+                                <a href="https://www.linkedin.com/in/elioteshelman" class="btn btn-secondary" target="_blank" rel="noopener">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                    </svg>
+                                    View LinkedIn Profile
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2>Side <span class="accent-blue">Projects</span></h2>
+
+            <a href="https://exoplanets.6by9.net" class="project-card" target="_blank" rel="noopener">
+                <div class="panel">
+                    <div class="panel-accent blue"></div>
+                    <div class="panel-body">
+                        <h3>Exoplanets Explorer</h3>
+                        <p>
+                            An interactive visualization of confirmed exoplanets discovered to date.
+                            Explore the cosmos through data — filter by discovery method, host star type,
+                            planetary characteristics, and more.
+                        </p>
+                        <p>
+                            Built as a personal project to combine my interests in astronomy, data visualization,
+                            and web development. The data is sourced from NASA's Exoplanet Archive and updated regularly.
+                        </p>
+                        <div class="project-link">
+                            exoplanets.6by9.net
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <div class="geo-divider"><div class="diamond"></div></div>
+
+            <p style="color: var(--gray-500); font-size: var(--text-sm);">More projects coming soon...</p>
+        </section>
+
+        <!-- Work Stuff Section -->
+        <section id="work">
+            <h2>Work <span class="accent">Stuff</span></h2>
+
+            <div class="panel social-panel">
+                <div class="panel-accent orange"></div>
+                <div class="panel-body">
+                    <div class="social-header">
+                        <div class="social-icon linkedin">
+                            <svg viewBox="0 0 24 24" fill="white">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 style="margin-bottom: 0;">LinkedIn Activity</h3>
+                            <a href="https://www.linkedin.com/in/elioteshelman" class="social-link" target="_blank" rel="noopener">@elioteshelman</a>
+                        </div>
+                    </div>
+
+                    <div class="embed-container">
+                        <div class="embed-placeholder">
+                            <p>LinkedIn doesn't support embedded post feeds.</p>
+                            <a href="https://www.linkedin.com/in/elioteshelman" class="btn btn-primary" target="_blank" rel="noopener">
+                                View Posts on LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blathering Section -->
+        <section id="blathering">
+            <h2><span class="accent-blue">Blathering</span></h2>
+
+            <div class="panel social-panel">
+                <div class="panel-accent blue"></div>
+                <div class="panel-body">
+                    <div class="social-header">
+                        <div class="social-icon x">
+                            <svg viewBox="0 0 24 24" fill="black">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 style="margin-bottom: 0;">X / Twitter</h3>
+                            <a href="https://x.com/hpc_twit" class="social-link" target="_blank" rel="noopener">@hpc_twit</a>
+                        </div>
+                    </div>
+
+                    <div class="embed-container twitter-embed">
+                        <a class="twitter-timeline"
+                           data-theme="dark"
+                           data-chrome="noheader nofooter noborders transparent"
+                           data-height="500"
+                           href="https://twitter.com/hpc_twit?ref_src=twsrc%5Etfw">
+                            Loading tweets...
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Eliot Eshelman. Built with minimal charm.</p>
+        </footer>
+    </main>
+
+    <!-- Twitter Widget JS -->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+    <!-- Navigation Active State -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            function updateActiveNav() {
+                let current = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveNav);
+            updateActiveNav();
+        });
+    </script>
+</body>
+</html>
