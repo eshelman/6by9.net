@@ -356,8 +356,13 @@
         }
 
         .embed-container.twitter-embed {
+            display: block;
             padding: 0;
             overflow: hidden;
+        }
+
+        .embed-container.twitter-embed .twitter-timeline {
+            width: 100% !important;
         }
 
         .embed-placeholder {
@@ -766,8 +771,9 @@
                     <div class="embed-container twitter-embed">
                         <a class="twitter-timeline"
                            data-theme="dark"
-                           data-chrome="noheader nofooter noborders transparent"
+                           data-chrome="noheader nofooter noborders noscrollbar"
                            data-height="500"
+                           data-width="100%"
                            href="https://twitter.com/hpc_twit?ref_src=twsrc%5Etfw">
                             Loading tweets...
                         </a>
