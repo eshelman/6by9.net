@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="274" height="274" viewBox="0 0 274 274">
+  <defs>
+    <linearGradient id="g0" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#24242b"/>
+      <stop offset="96.2%" stop-color="#3a1a0a"/>
+      <stop offset="100.0%" stop-color="#ff6b2c"/>
+      <stop offset="100%" stop-color="#ff6b2c"/>
+    </linearGradient>
+    <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#24242b"/>
+      <stop offset="85.7%" stop-color="#3a1a0a"/>
+      <stop offset="97.7%" stop-color="#ff6b2c"/>
+      <stop offset="100%" stop-color="#ff6b2c"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#24242b"/>
+      <stop offset="57.3%" stop-color="#3a1a0a"/>
+      <stop offset="69.3%" stop-color="#ff6b2c"/>
+      <stop offset="100%" stop-color="#ff6b2c"/>
+    </linearGradient>
+    <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#24242b"/>
+      <stop offset="80.1%" stop-color="#3a1a0a"/>
+      <stop offset="92.1%" stop-color="#ff6b2c"/>
+      <stop offset="100%" stop-color="#ff6b2c"/>
+    </linearGradient>
+    <linearGradient id="g4" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#24242b"/>
+      <stop offset="70.3%" stop-color="#3a1a0a"/>
+      <stop offset="82.3%" stop-color="#ff6b2c"/>
+      <stop offset="100%" stop-color="#ff6b2c"/>
+    </linearGradient>
+  </defs>
+  <rect x="47" y="242" width="28" height="28" rx="3" fill="url(#g0)"/>
+  <rect x="47" y="212" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="47" y="182" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="47" y="152" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="47" y="122" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="47" y="92" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="47" y="62" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="47" y="32" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="47" y="2" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="77" y="242" width="28" height="28" rx="3" fill="url(#g1)"/>
+  <rect x="77" y="212" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="77" y="182" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="77" y="152" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="77" y="122" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="77" y="92" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="77" y="62" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="77" y="32" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="77" y="2" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="107" y="242" width="28" height="28" rx="3" fill="url(#g2)"/>
+  <rect x="107" y="212" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="107" y="182" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="107" y="152" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="107" y="122" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="107" y="92" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="107" y="62" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="107" y="32" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="107" y="2" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="137" y="242" width="28" height="28" rx="3" fill="#ff6b2c"/>
+  <rect x="137" y="212" width="28" height="28" rx="3" fill="url(#g3)"/>
+  <rect x="137" y="182" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="137" y="152" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="137" y="122" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="137" y="92" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="137" y="62" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="137" y="32" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="137" y="2" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="167" y="242" width="28" height="28" rx="3" fill="#ff6b2c"/>
+  <rect x="167" y="212" width="28" height="28" rx="3" fill="#ff6b2c"/>
+  <rect x="167" y="182" width="28" height="28" rx="3" fill="#ff6b2c"/>
+  <rect x="167" y="152" width="28" height="28" rx="3" fill="url(#g4)"/>
+  <rect x="167" y="122" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="167" y="92" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="167" y="62" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="167" y="32" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="167" y="2" width="28" height="28" rx="3" fill="#24242b"/>
+  <rect x="197" y="242" width="28" height="28" rx="3" fill="#ff6b2c"/>
+  <rect x="197" y="212" width="28" height="28" rx="3" fill="#ff6b2c"/>
+  <rect x="197" y="182" width="28" height="28" rx="3" fill="#ff6b2c"/>
+  <rect x="197" y="152" width="28" height="28" rx="3" fill="#ff6b2c"/>
+  <rect x="197" y="122" width="28" height="28" rx="3" fill="#ff6b2c"/>
+  <rect x="197" y="92" width="28" height="28" rx="3" fill="#ff6b2c"/>
+  <rect x="197" y="62" width="28" height="28" rx="3" fill="#ff6b2c"/>
+  <rect x="197" y="32" width="28" height="28" rx="3" fill="#ff6b2c"/>
+  <rect x="197" y="2" width="28" height="28" rx="3" fill="#ff6b2c"/>
+</svg>
