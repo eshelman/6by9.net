@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vim.js Demo — 6by9.net</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Core Palette */
+            --charcoal-900: #1a1a1f;
+            --charcoal-800: #24242b;
+            --charcoal-700: #2e2e37;
+            --charcoal-600: #3a3a45;
+            --charcoal-500: #52525e;
+
+            /* Primary: Orange */
+            --orange-500: #ff6b2c;
+            --orange-400: #ff8a54;
+            --orange-300: #ffab80;
+            --orange-600: #e55a1f;
+
+            /* Secondary: Blue */
+            --blue-500: #2d8fc9;
+            --blue-400: #4da8df;
+            --blue-300: #7cc2eb;
+            --blue-600: #1f7ab3;
+
+            /* Neutrals */
+            --white: #ffffff;
+            --gray-100: #f4f4f6;
+            --gray-200: #e4e4e8;
+            --gray-300: #c8c8d0;
+            --gray-400: #9898a4;
+            --gray-500: #6b6b78;
+
+            /* Semantic */
+            --success: #34d399;
+
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+            /* Spacing Scale (8px base) */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+
+            /* Type Scale */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 2rem;
+            --text-4xl: 2.5rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--charcoal-900);
+            color: var(--gray-100);
+            line-height: 1.6;
+            font-size: var(--text-base);
+        }
+
+        /* Subtle texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            z-index: 1000;
+        }
+
+        /* Top Navigation Bar */
+        nav {
+            width: 100%;
+            background: var(--charcoal-800);
+            border-bottom: 1px solid var(--charcoal-700);
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            gap: var(--space-2);
+        }
+
+        .nav-links a {
+            display: block;
+            padding: var(--space-2) var(--space-4);
+            color: var(--gray-300);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: var(--text-sm);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+            background: var(--charcoal-700);
+        }
+
+        .nav-links a.back-link {
+            color: var(--orange-400);
+        }
+
+        .nav-links a.back-link:hover {
+            color: var(--orange-300);
+        }
+
+        /* Main Content */
+        main {
+            min-height: 100vh;
+        }
+
+        section {
+            padding: var(--space-16) var(--space-12);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        section:first-child {
+            min-height: auto;
+        }
+
+        section h2 {
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-8);
+        }
+
+        section h2 .accent {
+            color: var(--orange-500);
+        }
+
+        section h2 .accent-blue {
+            color: var(--blue-500);
+        }
+
+        /* Panel Card */
+        .panel {
+            background: var(--charcoal-800);
+            border: 1px solid var(--charcoal-700);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .panel:hover {
+            border-color: var(--charcoal-600);
+        }
+
+        .panel-accent {
+            height: 4px;
+            background: var(--orange-500);
+        }
+
+        .panel-accent.blue {
+            background: var(--blue-500);
+        }
+
+        .panel-body {
+            padding: var(--space-8);
+        }
+
+        .panel h3 {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            margin-bottom: var(--space-4);
+            color: var(--white);
+        }
+
+        .panel p {
+            color: var(--gray-300);
+            margin-bottom: var(--space-4);
+            line-height: 1.7;
+        }
+
+        .panel p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-6);
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: var(--text-sm);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--blue-400);
+            border: 1px solid var(--blue-500);
+        }
+
+        .btn-secondary:hover {
+            background: var(--blue-500);
+            color: var(--white);
+        }
+
+        /* Geo Divider */
+        .geo-divider {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            margin: var(--space-12) 0;
+        }
+
+        .geo-divider::before,
+        .geo-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--charcoal-700);
+        }
+
+        .geo-divider .hexagon {
+            width: 12px;
+            height: 14px;
+            background: var(--orange-500);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+
+        /* Mode Indicator */
+        .mode-indicator {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            padding: var(--space-3) var(--space-6);
+            background: var(--charcoal-800);
+            border: 1px solid var(--charcoal-700);
+            border-radius: 6px 6px 0 0;
+            border-left: 3px solid var(--orange-500);
+            font-family: var(--font-mono);
+            font-size: var(--text-sm);
+            transition: border-left-color 0.2s ease;
+        }
+
+        .mode-indicator.mode-general {
+            border-left-color: var(--orange-500);
+        }
+
+        .mode-indicator.mode-insert {
+            border-left-color: var(--blue-500);
+        }
+
+        .mode-indicator.mode-visual {
+            border-left-color: var(--success);
+        }
+
+        .mode-indicator.mode-command {
+            border-left-color: var(--gray-400);
+        }
+
+        .mode-label {
+            font-weight: 600;
+            color: var(--orange-400);
+            transition: color 0.2s ease;
+        }
+
+        .mode-general .mode-label { color: var(--orange-400); }
+        .mode-insert .mode-label { color: var(--blue-400); }
+        .mode-visual .mode-label { color: var(--success); }
+        .mode-command .mode-label { color: var(--gray-300); }
+
+        .mode-msg {
+            color: var(--gray-400);
+            flex: 1;
+            text-align: right;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Editor Area */
+        .editor-area {
+            margin-bottom: var(--space-8);
+        }
+
+        .editor-area textarea {
+            width: 100%;
+            background: var(--charcoal-900);
+            color: var(--gray-100);
+            border: 1px solid var(--charcoal-700);
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: var(--space-4) var(--space-6);
+            font-family: var(--font-mono);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .editor-area textarea:focus {
+            border-color: var(--charcoal-600);
+        }
+
+        .input-demo {
+            margin-top: var(--space-6);
+        }
+
+        .input-demo label {
+            display: block;
+            font-size: var(--text-sm);
+            color: var(--gray-400);
+            margin-bottom: var(--space-2);
+            font-family: var(--font-mono);
+        }
+
+        .input-demo input {
+            width: 100%;
+            background: var(--charcoal-900);
+            color: var(--gray-100);
+            border: 1px solid var(--charcoal-700);
+            border-radius: 6px;
+            padding: var(--space-3) var(--space-6);
+            font-family: var(--font-mono);
+            font-size: var(--text-sm);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .input-demo input:focus {
+            border-color: var(--charcoal-600);
+        }
+
+        /* Keyboard hint */
+        .keyboard-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--text-sm);
+            color: var(--gray-400);
+            margin-top: var(--space-2);
+        }
+
+        .keyboard-hint svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Principle Cards (Quick Reference) */
+        .principles-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .principle {
+            display: block;
+            background: var(--charcoal-900);
+            border-left: 3px solid var(--orange-500);
+            padding: var(--space-4) var(--space-6);
+            border-radius: 0 6px 6px 0;
+            transition: all 0.2s ease;
+        }
+
+        .principle:hover {
+            background: var(--charcoal-700);
+        }
+
+        .principle.orange {
+            border-left-color: var(--orange-500);
+        }
+
+        .principle.blue {
+            border-left-color: var(--blue-500);
+        }
+
+        .principle h4 {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+            color: var(--white);
+        }
+
+        .principle.orange h4 {
+            color: var(--orange-400);
+        }
+
+        .principle.blue h4 {
+            color: var(--blue-400);
+        }
+
+        .principle p {
+            font-size: var(--text-sm);
+            color: var(--gray-400);
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        .principle code {
+            font-family: var(--font-mono);
+            font-size: var(--text-xs);
+            background: var(--charcoal-700);
+            padding: 1px 4px;
+            border-radius: 3px;
+            color: var(--gray-200);
+        }
+
+        /* Footer */
+        footer {
+            padding: var(--space-8) var(--space-12);
+            border-top: 1px solid var(--charcoal-700);
+            text-align: center;
+            color: var(--gray-500);
+            font-size: var(--text-sm);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            section {
+                padding: var(--space-8) var(--space-6);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .principles-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="/" class="back-link">&larr; 6by9.net</a></li>
+        </ul>
+        <ul class="nav-links">
+            <li><a href="https://github.com/eshelman/Vim.js" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Introduction -->
+        <section>
+            <h2>Vim<span class="accent">.js</span> Demo</h2>
+
+            <div class="panel">
+                <div class="panel-accent"></div>
+                <div class="panel-body">
+                    <h3>Vim keybindings for the browser</h3>
+                    <p>
+                        Vim.js adds Vim-style modal editing to standard HTML textareas and inputs.
+                        Navigate with <code>hjkl</code>, enter insert mode with <code>i</code>,
+                        yank and paste with <code>yy</code>/<code>p</code> &mdash; all without
+                        leaving the browser.
+                    </p>
+                    <p class="keyboard-hint">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/>
+                        </svg>
+                        Best experienced with a physical keyboard
+                    </p>
+                    <div style="margin-top: var(--space-6);">
+                        <a href="https://github.com/eshelman/Vim.js" class="btn btn-secondary" target="_blank" rel="noopener">
+                            View on GitHub
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div style="max-width: 900px; margin: 0 auto; padding: 0 var(--space-12);">
+            <div class="geo-divider"><div class="hexagon"></div></div>
+        </div>
+
+        <!-- Interactive Editor -->
+        <section>
+            <h2>Try <span class="accent-blue">It</span></h2>
+
+            <div class="editor-area">
+                <div class="mode-indicator mode-general" id="modeIndicator">
+                    <span class="mode-label" id="modeLabel">GENERAL</span>
+                    <span class="mode-msg" id="modeMsg"></span>
+                </div>
+                <textarea id="vimTextarea" rows="20">
+Welcome to the Vim.js interactive demo!
+========================================
+
+Try these commands to get started:
+
+NAVIGATION
+  h / j / k / l    Move left / down / up / right
+  w / b / e        Next word / previous word / end of word
+  0 / $            Start / end of line
+  gg / G           Top / bottom of document
+
+EDITING
+  i                Enter insert mode (before cursor)
+  a                Enter insert mode (after cursor)
+  o                Open new line below
+  Esc              Return to general mode
+  dd               Delete current line
+  yy               Yank (copy) current line
+  p                Paste after cursor
+
+VISUAL MODE
+  v                Enter visual (character) mode
+  V                Enter visual (line) mode
+  y / d            Yank / delete selection
+
+SEARCH
+  /pattern         Search forward
+  n / N            Next / previous match
+
+UNDO / REDO
+  u                Undo
+  Ctrl+r           Redo
+
+Try editing this text! Press i to start typing,
+then Esc to return to general mode.
+</textarea>
+            </div>
+
+            <div class="input-demo">
+                <label>Single-line input &mdash; Vim.js works here too</label>
+                <input type="text" id="vimInput" value="Edit me with Vim keybindings!">
+            </div>
+        </section>
+
+        <div style="max-width: 900px; margin: 0 auto; padding: 0 var(--space-12);">
+            <div class="geo-divider"><div class="hexagon"></div></div>
+        </div>
+
+        <!-- Quick Reference -->
+        <section>
+            <h2>Quick <span class="accent">Reference</span></h2>
+
+            <div class="principles-list">
+                <div class="principle orange">
+                    <h4>Navigation</h4>
+                    <p>
+                        <code>h</code> <code>j</code> <code>k</code> <code>l</code> move cursor<br>
+                        <code>w</code> <code>b</code> <code>e</code> by word<br>
+                        <code>0</code> <code>$</code> line start/end<br>
+                        <code>gg</code> <code>G</code> file start/end
+                    </p>
+                </div>
+                <div class="principle blue">
+                    <h4>Editing</h4>
+                    <p>
+                        <code>i</code> <code>a</code> <code>o</code> enter insert<br>
+                        <code>dd</code> delete line<br>
+                        <code>yy</code> yank line / <code>p</code> paste<br>
+                        <code>x</code> delete char / <code>u</code> undo
+                    </p>
+                </div>
+                <div class="principle orange">
+                    <h4>Visual Mode</h4>
+                    <p>
+                        <code>v</code> character select<br>
+                        <code>V</code> line select<br>
+                        <code>y</code> yank / <code>d</code> delete<br>
+                        <code>c</code> change selection
+                    </p>
+                </div>
+                <div class="principle blue">
+                    <h4>Search</h4>
+                    <p>
+                        <code>/</code> search forward<br>
+                        <code>?</code> search backward<br>
+                        <code>n</code> <code>N</code> next / prev match<br>
+                        <code>*</code> <code>#</code> word under cursor
+                    </p>
+                </div>
+                <div class="principle blue">
+                    <h4>Text Objects</h4>
+                    <p>
+                        <code>diw</code> delete inner word<br>
+                        <code>ci"</code> change inside quotes<br>
+                        <code>da(</code> delete around parens<br>
+                        <code>yi{</code> yank inside braces
+                    </p>
+                </div>
+                <div class="principle orange">
+                    <h4>Counts</h4>
+                    <p>
+                        <code>5j</code> move 5 lines down<br>
+                        <code>3dd</code> delete 3 lines<br>
+                        <code>2w</code> move 2 words<br>
+                        <code>4x</code> delete 4 chars
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Eliot Eshelman. Built by Claude Code</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/gh/eshelman/Vim.js@modern-dev/build/vim.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentMode = 'general';
+            var modeIndicator = document.getElementById('modeIndicator');
+            var modeLabel = document.getElementById('modeLabel');
+            var modeMsg = document.getElementById('modeMsg');
+
+            function updateModeDisplay(mode) {
+                currentMode = mode;
+                modeIndicator.className = 'mode-indicator mode-' + mode;
+                var labels = {
+                    general: 'GENERAL',
+                    insert: 'INSERT',
+                    visual: 'VISUAL',
+                    command: 'COMMAND'
+                };
+                modeLabel.textContent = labels[mode] || mode.toUpperCase();
+            }
+
+            // Initialize Vim.js
+            var app;
+            try {
+                app = vim.open({
+                    debug: false,
+                    showMsg: function(msg) {
+                        modeMsg.textContent = msg;
+                    }
+                });
+            } catch(e) {
+                modeMsg.textContent = 'Failed to load Vim.js';
+            }
+
+            // Mode detection via key events
+            var textarea = document.getElementById('vimTextarea');
+            var input = document.getElementById('vimInput');
+            var vimElements = [textarea, input];
+
+            // Try to detect mode from the library's internal state
+            function detectModeFromLib() {
+                try {
+                    if (app && app.vim && app.vim.currentMode) {
+                        var modeMap = {
+                            'general_mode': 'general',
+                            'edit_mode': 'insert',
+                            'visual_mode': 'visual',
+                            'command_mode': 'command'
+                        };
+                        var detected = modeMap[app.vim.currentMode];
+                        if (detected) {
+                            updateModeDisplay(detected);
+                            return true;
+                        }
+                    }
+                } catch(e) {}
+                return false;
+            }
+
+            // Fallback: key-event state machine for mode tracking
+            document.addEventListener('keydown', function(e) {
+                // Only track when a vim element is focused
+                if (document.activeElement !== textarea && document.activeElement !== input) return;
+
+                // Short delay to let Vim.js process first, then check internal state
+                setTimeout(function() {
+                    if (detectModeFromLib()) return;
+
+                    // Fallback heuristic
+                    if (e.key === 'Escape') {
+                        updateModeDisplay('general');
+                    } else if (currentMode === 'general') {
+                        if (e.key === 'i' || e.key === 'a' || e.key === 'o' ||
+                            e.key === 'I' || e.key === 'A' || e.key === 'O' ||
+                            e.key === 's' || e.key === 'S' || e.key === 'c' || e.key === 'C') {
+                            updateModeDisplay('insert');
+                        } else if (e.key === 'v' || e.key === 'V') {
+                            updateModeDisplay('visual');
+                        } else if (e.key === ':') {
+                            updateModeDisplay('command');
+                        }
+                    } else if (currentMode === 'visual') {
+                        if (e.key === 'v' || e.key === 'V') {
+                            updateModeDisplay('general');
+                        }
+                    }
+                }, 10);
+            }, true);
+
+            // Reset to general on focus (mouse click resets in Vim.js)
+            vimElements.forEach(function(el) {
+                el.addEventListener('mousedown', function() {
+                    setTimeout(function() {
+                        detectModeFromLib() || updateModeDisplay('general');
+                    }, 10);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
