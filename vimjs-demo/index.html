@@ -528,31 +528,38 @@ Welcome to the Vim.js interactive demo!
 
 Try these commands to get started:
 
-NAVIGATION
+MOVE
   h / j / k / l    Move left / down / up / right
-  w / b / e        Next word / previous word / end of word
+  w / b            Next word / previous word
   0 / $            Start / end of line
   gg / G           Top / bottom of document
+  f{char}          Jump to character on line
+  { / }            Previous / next paragraph
 
-EDITING
-  i                Enter insert mode (before cursor)
-  a                Enter insert mode (after cursor)
-  o                Open new line below
+INSERT MODE
+  i / a            Insert before / after cursor
+  I / A            Insert at line start / end
+  o / O            Open line below / above
   Esc              Return to general mode
-  dd               Delete current line
-  yy               Yank (copy) current line
-  p                Paste after cursor
 
-VISUAL MODE
-  v                Enter visual (character) mode
-  V                Enter visual (line) mode
-  y / d            Yank / delete selection
+QUICK EDITS
+  x                Delete character under cursor
+  r                Replace single character
+  dd               Delete current line
+  cc               Change current line
+  C                Change to end of line
+  .                Repeat last edit
+
+COPY & PASTE
+  yy               Yank (copy) current line
+  p / P            Paste after / before cursor
 
 SEARCH
-  /pattern         Search forward
+  /query           Search forward
   n / N            Next / previous match
+  * / #            Search word under cursor
 
-UNDO / REDO
+UNDO & REDO
   u                Undo
   Ctrl+r           Redo
 
@@ -577,60 +584,71 @@ then Esc to return to general mode.
 
             <div class="principles-list">
                 <div class="principle orange">
-                    <h4>Navigation</h4>
+                    <h4>Move</h4>
                     <p>
                         <code>h</code> <code>j</code> <code>k</code> <code>l</code> move cursor<br>
-                        <code>w</code> <code>b</code> <code>e</code> by word<br>
-                        <code>0</code> <code>$</code> line start/end<br>
-                        <code>gg</code> <code>G</code> file start/end
+                        <code>w</code> <code>b</code> next / prev word<br>
+                        <code>0</code> <code>$</code> line start / end<br>
+                        <code>gg</code> <code>G</code> file start / end<br>
+                        <code>f</code><em>char</em> jump to character<br>
+                        <code>{</code> <code>}</code> prev / next paragraph
                     </p>
                 </div>
                 <div class="principle blue">
-                    <h4>Editing</h4>
+                    <h4>Enter Insert Mode</h4>
                     <p>
-                        <code>i</code> <code>a</code> <code>o</code> enter insert<br>
-                        <code>dd</code> delete line<br>
-                        <code>yy</code> yank line / <code>p</code> paste<br>
-                        <code>x</code> delete char / <code>u</code> undo
+                        <code>i</code> before cursor / <code>a</code> after<br>
+                        <code>I</code> line start / <code>A</code> line end<br>
+                        <code>o</code> new line below<br>
+                        <code>O</code> new line above<br>
+                        <code>Esc</code> back to general mode
                     </p>
                 </div>
                 <div class="principle orange">
+                    <h4>Delete &amp; Change</h4>
+                    <p>
+                        <code>x</code> delete char<br>
+                        <code>dd</code> delete line<br>
+                        <code>dw</code> delete word<br>
+                        <code>cc</code> change line<br>
+                        <code>C</code> change to end of line<br>
+                        <code>r</code> replace single char<br>
+                        <code>s</code> substitute char
+                    </p>
+                </div>
+                <div class="principle blue">
+                    <h4>Copy, Paste &amp; Undo</h4>
+                    <p>
+                        <code>yy</code> yank (copy) line<br>
+                        <code>p</code> paste after / <code>P</code> before<br>
+                        <code>u</code> undo<br>
+                        <code>Ctrl+r</code> redo<br>
+                        <code>.</code> repeat last edit
+                    </p>
+                </div>
+                <div class="principle orange">
+                    <h4>Search</h4>
+                    <p>
+                        <code>/</code><em>query</em> search forward<br>
+                        <code>n</code> <code>N</code> next / prev match<br>
+                        <code>*</code> <code>#</code> search word at cursor
+                    </p>
+                </div>
+                <div class="principle blue">
                     <h4>Visual Mode</h4>
                     <p>
-                        <code>v</code> character select<br>
-                        <code>V</code> line select<br>
+                        <code>v</code> start selecting<br>
                         <code>y</code> yank / <code>d</code> delete<br>
                         <code>c</code> change selection
                     </p>
                 </div>
-                <div class="principle blue">
-                    <h4>Search</h4>
-                    <p>
-                        <code>/</code> search forward<br>
-                        <code>?</code> search backward<br>
-                        <code>n</code> <code>N</code> next / prev match<br>
-                        <code>*</code> <code>#</code> word under cursor
-                    </p>
-                </div>
-                <div class="principle blue">
-                    <h4>Text Objects</h4>
-                    <p>
-                        <code>diw</code> delete inner word<br>
-                        <code>ci"</code> change inside quotes<br>
-                        <code>da(</code> delete around parens<br>
-                        <code>yi{</code> yank inside braces
-                    </p>
-                </div>
-                <div class="principle orange">
-                    <h4>Counts</h4>
-                    <p>
-                        <code>5j</code> move 5 lines down<br>
-                        <code>3dd</code> delete 3 lines<br>
-                        <code>2w</code> move 2 words<br>
-                        <code>4x</code> delete 4 chars
-                    </p>
-                </div>
             </div>
+
+            <p style="color: var(--gray-400); font-size: var(--text-sm); margin-top: var(--space-8); line-height: 1.7;">
+                Vim.js supports many more bindings &mdash; text objects (<code style="font-family: var(--font-mono); font-size: var(--text-xs); background: var(--charcoal-700); padding: 1px 4px; border-radius: 3px; color: var(--gray-200);">diw</code>, <code style="font-family: var(--font-mono); font-size: var(--text-xs); background: var(--charcoal-700); padding: 1px 4px; border-radius: 3px; color: var(--gray-200);">ci"</code>, <code style="font-family: var(--font-mono); font-size: var(--text-xs); background: var(--charcoal-700); padding: 1px 4px; border-radius: 3px; color: var(--gray-200);">da(</code>),
+                WORD motions, count prefixes, and more. See the full list on
+                <a href="https://github.com/eshelman/Vim.js" target="_blank" rel="noopener" style="color: var(--blue-400);">GitHub</a>.
+            </p>
         </section>
 
         <footer>
