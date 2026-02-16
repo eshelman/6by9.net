@@ -476,46 +476,13 @@
     </nav>
 
     <main>
-        <!-- Introduction -->
+        <!-- Interactive Demo -->
         <section>
             <h2>Vim<span class="accent">.js</span> Demo</h2>
 
-            <div class="panel">
-                <div class="panel-accent"></div>
-                <div class="panel-body">
-                    <h3>Vim keybindings for the browser</h3>
-                    <p>
-                        Vim.js adds Vim-style modal editing to standard HTML textareas and inputs.
-                        Navigate with <code>hjkl</code>, enter insert mode with <code>i</code>,
-                        yank and paste with <code>yy</code>/<code>p</code> &mdash; all without
-                        leaving the browser.
-                    </p>
-                    <p class="keyboard-hint">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="4" width="20" height="16" rx="2"/>
-                            <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/>
-                        </svg>
-                        Best experienced with a physical keyboard
-                    </p>
-                    <div style="margin-top: var(--space-6);">
-                        <a href="https://github.com/eshelman/Vim.js" class="btn btn-secondary" target="_blank" rel="noopener">
-                            View on GitHub
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div style="max-width: 900px; margin: 0 auto; padding: 0 var(--space-12);">
-            <div class="geo-divider"><div class="hexagon"></div></div>
-        </div>
-
-        <!-- Interactive Editor -->
-        <section>
-            <h2>Try <span class="accent-blue">It</span></h2>
+            <p style="color: var(--gray-300); margin-bottom: var(--space-6); line-height: 1.7;">
+                Vim-style modal editing for standard HTML textareas and inputs &mdash; click below and try it out.
+            </p>
 
             <div class="editor-area">
                 <div class="mode-indicator mode-general" id="modeIndicator">
@@ -649,6 +616,15 @@ then Esc to return to general mode.
                 WORD motions, count prefixes, and more. See the full list on
                 <a href="https://github.com/eshelman/Vim.js" target="_blank" rel="noopener" style="color: var(--blue-400);">GitHub</a>.
             </p>
+
+            <div style="margin-top: var(--space-8);">
+                <a href="https://github.com/eshelman/Vim.js" class="btn btn-secondary" target="_blank" rel="noopener">
+                    View on GitHub
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </a>
+            </div>
         </section>
 
         <footer>
